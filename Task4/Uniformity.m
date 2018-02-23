@@ -1,0 +1,23 @@
+function [result] = Uniformity(image,len)
+sum=[0];
+uniquePixelCount=1;
+image=double(image);
+uniquePixelsOccure=zeros(256);
+finalPixels=zeros(256);
+for i =1:len
+pixel=image(i)+1;    
+if(uniquePixelsOccure(pixel)==0)
+    finalPixels(uniquePixelCount)=pixel;
+    uniquePixelCount=uniquePixelCount+1;
+end
+uniquePixelsOccure(pixel)=uniquePixelsOccure(pixel)+1;
+end
+uniquePixelCount=uniquePixelCount-1;
+for i =1:uniquePixelCount
+pixel=finalPixels(i); 
+pixelCount=uniquePixelsOccure(pixel);
+ans=(pixelCount/len).^2;
+sum(1,1)=sum(1,1)+ans;
+end
+result=sum(1,1);
+end
